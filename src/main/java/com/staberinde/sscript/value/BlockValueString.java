@@ -116,18 +116,13 @@ public class BlockValueString extends AbstractBlockValue<String> {
     public BlockValue add(BlockValue other) {
         if (other.isNumeric()) {
             try {
-                switch(mostComplex(other)) {
-                    case FLOAT:
-                        return BlockValueFloat.from(this.asFloat() + other.asFloat());
-                    case DOUBLE:
-                        return BlockValueDouble.from(this.asDouble() + other.asDouble());
-                    case LONG:
-                        return BlockValueLong.from(this.asLong() + other.asLong());
-                    case INTEGER:
-                        return BlockValueInteger.from(this.asInteger() + other.asInteger());
-                    default:
-                        throw new SSException("Cannot add " + this.getType() + " and " + other.getType());
-                }
+                return switch (mostComplex(other)) {
+                    case FLOAT -> BlockValueFloat.from(this.asFloat() + other.asFloat());
+                    case DOUBLE -> BlockValueDouble.from(this.asDouble() + other.asDouble());
+                    case LONG -> BlockValueLong.from(this.asLong() + other.asLong());
+                    case INTEGER -> BlockValueInteger.from(this.asInteger() + other.asInteger());
+                    default -> throw new SSException("Cannot add " + this.getType() + " and " + other.getType());
+                };
             } catch(final SSException e) {
                 throw new SSException("Cannot add " + this.getType() + " and " + other.getType());
             }

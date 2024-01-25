@@ -41,7 +41,7 @@ public abstract class BlockDefinition<T extends PureBlock> {
                 field.setAccessible(true);
                 final ParamInfo info = new ParamInfo(field, annotation);
                 this.valueIndex.put(annotation.value(), info);
-                if (annotation.name().length() == 0) {
+                if (annotation.name().isEmpty()) {
                     this.minimumParameters++;
                 } else {
                     this.nameIndex.put(annotation.name(), info);

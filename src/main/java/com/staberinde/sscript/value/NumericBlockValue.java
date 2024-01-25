@@ -4,8 +4,6 @@ import com.staberinde.sscript.exception.SSException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.List;
-import java.util.Set;
 
 public abstract class NumericBlockValue<T extends Number> extends AbstractBlockValue<T> {
     private static final int DEFAULT_SCALE = 0;
@@ -101,8 +99,4 @@ public abstract class NumericBlockValue<T extends Number> extends AbstractBlockV
         return BigDecimal.valueOf(this.getValue().doubleValue()).setScale(this.getScale(), RoundingMode.HALF_UP).toString();
     }
 
-    @Override
-    public String toString() {
-        return this.getValue().toString();
-    }
 }

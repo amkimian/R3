@@ -87,7 +87,7 @@ public abstract class Scope<T extends BlockValue> {
     private void doIndexSet(final BlockValue rootVal, final List<? extends BlockValue> indices, BlockValue toSet) {
         if (rootVal.isMap()) {
             final Map<String, BlockValue> rootMap = rootVal.asMap();
-            final BlockValue keyVal = indices.remove(0);
+            final BlockValue keyVal = indices.removeFirst();
             if (!keyVal.isString()) {
                 throw new SSException("Cannot access numeric index of map");
             }
@@ -99,7 +99,7 @@ public abstract class Scope<T extends BlockValue> {
             }
         } else {
             List<BlockValue> rootList = rootVal.asInternalList();
-            final BlockValue idVal = indices.remove(0);
+            final BlockValue idVal = indices.removeFirst();
             final int idx = resolveIndex(rootVal, idVal);
             try {
                 if (indices.isEmpty()) {

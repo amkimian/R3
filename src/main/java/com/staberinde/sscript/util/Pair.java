@@ -37,8 +37,7 @@ public final class Pair<F,S> {
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
-        } else if (obj instanceof Pair<?,?>) {
-            Pair<?,?> pair = (Pair<?, ?>)obj;
+        } else if (obj instanceof Pair<?, ?> pair) {
             return getFirstValue().equals(pair.getFirstValue()) && getSecondValue().equals(pair.getSecondValue());
         }
         return false;
