@@ -18,7 +18,7 @@ public class ParamInfo {
         } else {
             final Function<BlockValue, Object> conversionFunc = getConverter(annotation.type());
             if (conversionFunc != null && annotation.nullable()) {
-                this.converter = (v) -> v == null ? null : conversionFunc.apply(v);
+                this.converter = (v) -> v.isNull() ? null : conversionFunc.apply(v);
             } else {
                 this.converter = conversionFunc;
             }
@@ -27,7 +27,7 @@ public class ParamInfo {
 
     private Function<BlockValue, Object> getConverter(final ValueType type) {
         return switch (type) {
-            case NULL -> (v) -> null;
+            case NULL -> null;
             case BOOLEAN -> BlockValue::asBoolean;
             case STRING -> BlockValue::asString;
             case INTEGER -> BlockValue::asInteger;
