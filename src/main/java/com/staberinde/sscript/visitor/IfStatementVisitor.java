@@ -27,7 +27,7 @@ public class IfStatementVisitor extends ContextualVisitor<CoreBlock>{
         if (elifs.isEmpty()) {
             return elseBlock;
         } else {
-            final SScriptParser.TestAndBlockContext next = elifs.remove(0);
+            final SScriptParser.TestAndBlockContext next = elifs.removeFirst();
             final ExpressionVisitor ev = new ExpressionVisitor(this.parseContext);
             final BlockVisitor bv = new BlockVisitor(this.parseContext);
             return new IfBlock(next.start, ev.visitExpression(next.test), bv.visitBlock(next.xb), parseElifs(elifs, elseBlock));

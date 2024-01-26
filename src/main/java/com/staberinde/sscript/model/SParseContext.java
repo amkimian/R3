@@ -20,7 +20,7 @@ public class SParseContext {
     private final List<String> requiredParams = new ArrayList<>();
     private List<String> optionalParams;
 
-    private List<SParseContext> children = new ArrayList<>();
+    private final List<SParseContext> children = new ArrayList<>();
 
     protected final Map<String, ProcDef> procedureDefs;
 
@@ -96,7 +96,7 @@ public class SParseContext {
     }
 
     public List<String> getRequiredParams() {
-        return new ArrayList<String>(requiredParams);
+        return new ArrayList<>(requiredParams);
     }
 
     public void addOptionalParams(String name) {
@@ -107,7 +107,7 @@ public class SParseContext {
     }
 
     public List<String> getOptionalParams() {
-        return optionalParams == null ? null : new ArrayList<String>(optionalParams);
+        return optionalParams == null ? null : new ArrayList<>(optionalParams);
     }
 
     public List<String> getParameterNames() {
@@ -158,8 +158,7 @@ public class SParseContext {
         @Override
         public boolean equals(final Object o) {
             if (this == o) return true;
-            if (!(o instanceof ProcCallInfo)) return false;
-            final ProcCallInfo that = (ProcCallInfo) o;
+            if (!(o instanceof ProcCallInfo that)) return false;
             return Objects.equals(location, that.location) &&
                     Objects.equals(functionName, that.functionName) &&
                     Objects.equals(params, that.params);
