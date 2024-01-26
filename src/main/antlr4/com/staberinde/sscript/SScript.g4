@@ -55,6 +55,7 @@ assignment
     | id=(Identifier | DottedIdentifier) '=' exp=expression
     | indexId=indexIdentifier '=' exp=expression
     | (opequals=(Identifier | DottedIdentifier) | indexIdentifier) op=(LOGICALAND | LOGICALOR | PLUS | MINUS | MUL | DIV | MOD | POWER) '=' exp=expression
+    | lambdaId=Identifier '=' lexp=lambdaExpression
     ;
 
 ifStatement
@@ -84,7 +85,33 @@ valueExpression
     | valueExpression op=(PLUS | MINUS) valueExpression #addExpr
     | valueExpression op=(GTEQ | LTEQ | GT | LT) valueExpression #relExpr
     | valueExpression op=(EQUALS | NOTEQUALS) valueExpression #equExpr
-    | unaryExpr #baseExpr
+    | (
+        lambdaCall |
+        funcChain |
+        unaryExpr) #baseExpr
+    ;
+
+generalFunc
+    : isDef
+    | mfrExpr
+    | name=Identifier '(' params+=namedParameter? (COMMA params+=namedParameter)* ')'
+    ;
+
+isDef
+    : 'isDefined' '(' var=Identifier ')'
+    ;
+
+mfrExpr
+    : type=(MAP | FILTER | REDUCE) '(' exp=expression (',' initial=expression)? ',' lambda=lambdaExpression ')'
+    ;
+
+MAP: 'map';
+FILTER: 'filter';
+REDUCE: 'reduce';
+
+funcChain
+    : funcChain CHAIN funcChain #chainExpr
+    | (func=generalFunc | proc=procCall) #callExpr
     ;
 
 namedParameter

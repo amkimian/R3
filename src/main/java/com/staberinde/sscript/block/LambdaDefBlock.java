@@ -5,12 +5,14 @@ import com.staberinde.sscript.program.ProgramContext;
 import com.staberinde.sscript.value.BlockValue;
 import org.antlr.v4.runtime.Token;
 
+import java.util.List;
+
 public class LambdaDefBlock extends LocationAwareBlock implements CoreBlock {
     private final LambdaDef lambdaDef;
 
-    public LambdaDefBlock(Token loc, LambdaDef lambdaDef) {
+    public LambdaDefBlock(Token loc, List<String> varNames, BlockStatementList block) {
         super(loc);
-        this.lambdaDef = lambdaDef;
+        this.lambdaDef = new LambdaDef(varNames, block);
     }
 
     @Override

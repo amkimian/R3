@@ -14,6 +14,10 @@ public abstract class ProgramContext<T extends BlockValue> {
         return currentScope.getVariableMap();
     }
 
+    public String toString() {
+        return "Scope: " + currentScope.toString() + ", Return: " + this.returnVal;
+    }
+
     protected ProgramContext(final Scope<T> scope) {
         this.currentScope = scope;
         this.returnVal = null;

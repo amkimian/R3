@@ -15,6 +15,10 @@ import java.util.Map;
 public abstract class Scope<T extends BlockValue> {
     private final Map<String, T> variables = new HashMap<>();
 
+    public String toString() {
+        return variables.toString();
+    }
+
     private Scope<T> parentScope = null;
     private boolean setIsLocal = true;
 

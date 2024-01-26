@@ -28,6 +28,9 @@ public class AssignmentVisitor extends ContextualVisitor<CoreBlock> {
         if (ctx.exp != null) {
             ExpressionVisitor ev = new ExpressionVisitor(this.parseContext);
             toSet = ev.visit(ctx.exp);
+        }  else if (ctx.lexp != null) {
+            LambdaVisitor lv = new LambdaVisitor(this.parseContext);
+            toSet = lv.visitLambdaExpression(ctx.lexp);
         } else {
             throw new SSParseException("Assignment must have an expression");
         }
@@ -35,6 +38,8 @@ public class AssignmentVisitor extends ContextualVisitor<CoreBlock> {
             return new VariablesSet(ctx.start, ctx.id.getText(), toSet);
         } else if (ctx.op != null) {
             return handleOpEquals(ctx, toSet);
+        } else if (ctx.lambdaId != null) {
+            return new VariablesSet(ctx.start, ctx.lambdaId.getText(), toSet);
         } else if (ctx.indexId != null) {
             return handleIndexAssign(ctx.indexId, toSet);
         } else {
