@@ -1,11 +1,11 @@
 package com.staberinde.sscript.block;
 
+import com.staberinde.sscript.SScriptLexer;
 import com.staberinde.sscript.exception.SSParseException;
 import com.staberinde.sscript.program.CoreBlock;
 import com.staberinde.sscript.program.ProgramContext;
 import com.staberinde.sscript.value.BlockValue;
 import org.antlr.v4.runtime.Token;
-import com.staberinde.sscript.SScriptLexer;
 
 import java.util.Optional;
 import java.util.function.BiConsumer;

@@ -216,6 +216,7 @@ Number
     | Int 'E' ('+'| '-')? Digit (Digit)*
     ;
 
+
 DottedIdentifier
     : Identifier ('.' Identifier)+
     ;
@@ -223,6 +224,7 @@ DottedIdentifier
 indexIdentifier
     : id=(Identifier | DottedIdentifier) ( '[' index+=expression ']')+
     ;
+
 
 Identifier
     : ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A' ..'Z' | '_' | Digit)*
